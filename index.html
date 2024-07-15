@@ -115,6 +115,33 @@
             font-size: 16px;
             cursor: pointer;
         }
+        .control-buttons {
+            position: fixed;
+            top: 420px; /* Adjust this value based on the height of the slideshow */
+            width: 100%;
+            text-align: center;
+            z-index: 1000;
+        }
+        .thumbnail-container {
+            position: fixed;
+            top: 460px; /* Adjust this value based on the height of the control buttons */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            z-index: 1000;
+        }
+        .thumbnail {
+            margin: 5px;
+            cursor: pointer;
+        }
+        .thumbnail img {
+            width: 60px; /* Small thumbnail width */
+            height: 45px; /* Small thumbnail height */
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
         footer {
             text-align: center;
             position: fixed;
@@ -142,7 +169,7 @@
     <div class="slides">
         <img src="imgs/Photo.jpg" alt="Photo 1">
     </div>
-    
+
     <div class="slides">
         <img src="imgs/Photo1.jpg" alt="Photo 1">
     </div>
@@ -179,6 +206,35 @@
 <div class="control-buttons">
     <button id="control-button" onclick="toggleSlideshow()">Stop</button>
 </div>
+
+<div class="thumbnail-container">
+    <div class="thumbnail" onclick="currentSlide(1)">
+        <img src="imgs/Photo.jpg" alt="Thumbnail 1">
+    </div>
+    <div class="thumbnail" onclick="currentSlide(2)">
+        <img src="imgs/Photo1.jpg" alt="Thumbnail 2">
+    </div>
+    <div class="thumbnail" onclick="currentSlide(3)">
+        <img src="imgs/Photo2.jpg" alt="Thumbnail 3">
+    </div>
+    <div class="thumbnail" onclick="currentSlide(4)">
+        <img src="imgs/Photo3.jpg" alt="Thumbnail 4">
+    </div>
+    <div class="thumbnail" onclick="currentSlide(5)">
+        <img src="imgs/Photo4.jpg" alt="Thumbnail 5">
+    </div>
+    <div class="thumbnail" onclick="currentSlide(6)">
+        <img src="imgs/Photo5.jpg" alt="Thumbnail 6">
+    </div>
+    <div class="thumbnail" onclick="currentSlide(7)">
+        <img src="imgs/Photo6.jpg" alt="Thumbnail 7">
+    </div>
+    <div class="thumbnail" onclick="currentSlide(8)">
+        <img src="imgs/Photo7.jpg" alt="Thumbnail 8">
+    </div>
+</div>
+
+
 
 <footer>
     Created by HANZEL E. LACIDA and designed and developed by <a href="https://www.zeldigital.com">ZELDIGITAL</a>.
