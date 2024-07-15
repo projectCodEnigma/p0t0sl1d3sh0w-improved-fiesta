@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Album Slideshow</title>
+    
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="A simple and elegant photo album slideshow featuring your favorite images. View, navigate, and enjoy your photo collection in a beautiful slideshow format.">
+    <meta name="keywords" content="photo album, slideshow, photo slideshow, image gallery, photo gallery, photo slideshow HTML, image slideshow, CSS slideshow, JavaScript slideshow">
+    <meta name="author" content="HANZEL E. LACIDA">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Photo Album Slideshow">
+    <meta property="og:description" content="A simple and elegant photo album slideshow featuring your favorite images. View, navigate, and enjoy your photo collection in a beautiful slideshow format.">
+    <meta property="og:image" content="https://via.placeholder.com/600x400?text=Photo+1">
+    <meta property="og:url" content="https://www.zel.digital">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Photo Album Slideshow">
+    <meta name="twitter:description" content="A simple and elegant photo album slideshow featuring your favorite images. View, navigate, and enjoy your photo collection in a beautiful slideshow format.">
+    <meta name="twitter:image" content="https://via.placeholder.com/600x400?text=Photo+1">
+    
+    <!-- CSS for Slideshow -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #ffffff;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .slideshow-container {
+            position: fixed;
+            top: 60px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            z-index: 1000;
+        }
+        .slides {
+            display: none;
+        }
+        .slides img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev {
+            left: 0;
+        }
+        .dot-container {
+            text-align: center;
+            padding: 10px 0;
+        }
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+        .control-buttons {
+            position: fixed;
+            top: 360px; /* Adjust this value based on the height of the slideshow */
+            width: 100%;
+            text-align: center;
+            z-index: 1000;
+        }
+        .control-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+        footer a {
+            color: red;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Photo Album Slideshow
+</header>
+
+<div class="slideshow-container">
+
+    <div class="slides">
+        <img src="imgs/Photo1.jpg" alt="Photo 1">
+    </div>
+
+    <div class="slides">
+        <img src="imgs/Photo2.jpg" alt="Photo 2">
+    </div>
+
+    <div class="slides">
+        <img src="imgs/Photo3.jpg" alt="Photo 3">
+    </div>
+
+    <div class="slides">
+        <img src="imgs/Photo4.jpg" alt="Photo 4">
+    </div>
+
+    <div class="slides">
+        <img src="imgs/Photo5.jpg" alt="Photo 5">
+    </div>
+
+    <div class="slides">
+        <img src="imgs/Photo6.jpg" alt="Photo 6">
+    </div>
+
+    <div class="slides">
+        <img src="imgs/Photo7.jpg" alt="Photo 7">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+</div>
+
+<div class="control-buttons">
+    <button id="control-button" onclick="toggleSlideshow()">Stop</button>
+</div>
+
+<footer>
+    Created by HANZEL E. LACIDA and designed and developed by <a href="https://www.zeldigital.com">ZELDIGITAL</a>.
+</footer>
+
+<script>
+    let slideIndex = 1;
+    let interval;
+    const controlButton = document.getElementById('control-button');
+
+    function plusSlides(n) {
+        clearInterval(interval);
+        showSlides(slideIndex += n);
+        startSlideshow();
+    }
+
+    function currentSlide(n) {
+        clearInterval(interval);
+        showSlides(slideIndex = n);
+        startSlideshow();
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    }
+
+    function startSlideshow() {
+        interval = setInterval(() => {
+            showSlides(slideIndex += 1);
+        }, 500);
+        controlButton.textContent = 'Stop';
+    }
+
+    function stopSlideshow() {
+        clearInterval(interval);
+        controlButton.textContent = 'Play';
+    }
+
+    function toggleSlideshow() {
+        if (controlButton.textContent === 'Stop') {
+            stopSlideshow();
+        } else {
+            startSlideshow();
+        }
+    }
+
+    // Initialize the slideshow
+    showSlides(slideIndex);
+    startSlideshow();
+</script>
+
+</body>
+</html>
